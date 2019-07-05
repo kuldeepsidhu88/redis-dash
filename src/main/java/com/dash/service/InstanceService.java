@@ -1,10 +1,12 @@
 package com.dash.service;
 
+import com.dash.model.Info;
 import com.dash.model.Instance;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -39,5 +41,13 @@ public class InstanceService {
 
     public List<Instance> getRegisteredInstances() {
         return instances;
+    }
+
+    public Optional<Instance> getInstance(String uuid) {
+        return instances.stream().filter(instance -> instance.getUuid().equals(uuid)).findFirst();
+    }
+
+    public Info getInstanceOverview(Instance instance) {
+        return null;
     }
 }

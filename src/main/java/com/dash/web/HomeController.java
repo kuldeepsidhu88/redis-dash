@@ -19,6 +19,6 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("instances", instanceService.getRegisteredInstances());
-        return "index";
+        return "index.html";
     }
 }

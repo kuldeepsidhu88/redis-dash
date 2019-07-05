@@ -5,11 +5,14 @@ import com.dash.model.Instance;
 import com.dash.service.InfoService;
 import com.dash.service.InstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/instances")
 public class InstanceController {
 
@@ -25,11 +28,18 @@ public class InstanceController {
     }
 
     @GetMapping("/{uuid}")
-    public Info getInstanceDetails(@PathVariable String uuid) {
-        return infoService.getInfo();
+    public String getInstanceDetails(@PathVariable String uuid, Model model) {
+        Optional<Instance> instance = instanceService.getInstance(uuid);
+        if(instance.isPresent()) {
+            Info instanceOverview = instanceService.getInstanceOverview(instance.get());
+            model.addAttribute("instance",instance.get());
+            model.addAttribute("overview",instanceOverview);
+        }
+        return "overview.html";
     }
 
     @PostMapping
+    @ResponseBody
     public Instance registerInstance(@RequestBody Instance instance) {
         return instanceService.registerInstance(instance.getName(), instance.getHostname(), instance.getPort());
     }

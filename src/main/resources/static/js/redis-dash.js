@@ -8,6 +8,8 @@ function addInstance() {
     data['hostname']=hostname;
     data['port']=port;
 
+    // TODO: Add validation on fields
+
     $.ajax({
         type:"POST",
         url:"/instances",
@@ -15,9 +17,10 @@ function addInstance() {
         data: JSON.stringify(data),
         dataType:"json",
         success: function (data) {
+            $("#addInstanceForm").trigger('reset');
             $("#addInstanceModal").modal('hide');
             var newInstanceHtml = "<div class=\"col-lg-4\">\n" +
-                                        "<a href=\"" + data.uuid + "\" class=\"card btn-primary text-white bg-info mb-3\"  role=\"button\">" +
+                                        "<a href=\"instances/" + data.uuid + "\" class=\"card btn-primary text-white bg-info mb-3\"  role=\"button\">" +
                                         "<div class=\"card-body\">" +
                                             "<h5 class=\"card-title\">" + data.name + "</h5>" +
                                             "<p class=\"card-text\">" + data.hostname + ":" + data.port + "</p>" +
