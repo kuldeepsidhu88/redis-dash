@@ -34,6 +34,7 @@ public class InstanceController {
             Info instanceOverview = instanceService.getInstanceOverview(instance.get());
             model.addAttribute("instance",instance.get());
             model.addAttribute("overview",instanceOverview);
+            model.addAttribute("info",instanceOverview);
         }
         return "overview.html";
     }

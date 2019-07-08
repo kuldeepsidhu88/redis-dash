@@ -11,6 +11,7 @@
 
     <!--<link rel="stylesheet" href="/css/sticky-footer.css">-->
     <link rel="stylesheet" href="/css/sticky-footer.css">
+    <!--<link rel="stylesheet" href="/css/custom-styles.css">-->
 
 
 </head>
@@ -31,22 +32,68 @@
             <p th:text="${'Hostname: ' + instance.hostname + ':' + instance.port}"></p>
         </div>
         <div class="col-lg-12">
-            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-                <!--<a class="navbar-brand" th:href="${instance.uuid}" th:text="${instance.name}"></a>-->
+            <!--<nav class="navbar navbar-expand-lg">
+                &lt;!&ndash;<a class="navbar-brand" th:href="${instance.uuid}" th:text="${instance.name}"></a>&ndash;&gt;
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
-                        <a class="nav-item nav-link" href="#">Configuration</a>
-                        <a class="nav-item nav-link" href="#">Clients</a>
+                        <a class="nav-item btn btn-danger" href="">Overview<span class="sr-only">(current)</span></a>
+                        <a class="nav-item btn" href="#">Configuration</a>
+                        <a class="nav-item btn" href="#">Clients</a>
                     </div>
                 </div>
-            </nav>
+            </nav>-->
+            <ul class="nav nav-pills nav-justified">
+                <a class="nav-item btn btn-danger" href="">Overview</a>
+                <a class="nav-item btn" href="#">Configuration</a>
+                <a class="nav-item btn" href="#">Clients</a>
+            </ul>
         </div>
     </div>
-
+    <div class="row text-center mt-3" id="overview">
+        <div class="col-lg-3">
+            <h2 th:text="${info.totalKeys}"></h2>
+            <h6>Total Keys</h6>
+        </div>
+        <div class="col-lg-3">
+            <h2 th:text="${info.connectedClients}"></h2>
+            <h6>Connected Clients</h6>
+        </div>
+        <div class="col-lg-3 ">
+            <h2 th:text="${info.connectionsReceived}"></h2>
+            <h6>Connections Received</h6>
+        </div>
+        <div class="col-lg-3">
+            <h2 th:text="${info.connectionsRejected}"></h2>
+            <h6>Connections Rejected</h6>
+        </div>
+        <div class="col-lg-3">
+            <h2 th:text="${info.usedMemory}"></h2>
+            <h6>Used Memory</h6>
+        </div>
+        <div class="col-lg-3">
+            <h2 th:text="${info.totalMemory}"></h2>
+            <h6>Total Memory</h6>
+        </div>
+        <div class="col-lg-3">
+            <h2 th:text="${info.hitRatio}"></h2>
+            <h6>Hit Ratio</h6>
+        </div>
+        <div class="col-lg-3">
+            <h2 th:text="${info.uptime}"></h2>
+            <h6>Uptime</h6>
+        </div>
+        <div class="col-lg-3">
+            <h2 th:text="${info.role}"></h2>
+            <h6>Role</h6>
+        </div>
+        <div class="col-lg-3">
+            <h2 th:text="${info.version}"></h2>
+            <h6>Version</h6>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <hr/>

@@ -48,6 +48,16 @@ public class InstanceService {
     }
 
     public Info getInstanceOverview(Instance instance) {
-        return null;
+        Info info = new Info();
+        info.setTotalKeys(136);
+        info.setConnectedClients(49);
+        info.setConnectionsReceived(1567);
+        info.setHitRatio(0.88f);
+        info.setUptime(12.56f);
+        info.setConnectionsRejected(0);
+        info.setTotalMemory(150);
+        info.setVersion("5.0.3");
+        info.setRole("master");
+        return info;
     }
 }
