@@ -2,18 +2,21 @@ package com.dash.service;
 
 import com.dash.model.Info;
 import com.dash.model.Instance;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class InstanceService {
-    List<Instance> instances = new ArrayList<>();
+    List<Instance> instances;
+    Map<String, RedisConnection> instanceConnections;
 
     public InstanceService() {
+        instances = new ArrayList<>();
+        instanceConnections = new HashMap<>();
         Instance one = new Instance();
         one.setHostname("192.168.0.1");
         one.setName("Sample Instance");
@@ -21,6 +24,7 @@ public class InstanceService {
         one.setUuid(UUID.randomUUID().toString());
 
         instances.add(one);
+        instanceConnections.put(one.getUuid(),getRedisConnection(one.getHostname(),one.getPort()));
         /*instances.add(one);
         instances.add(one);
         instances.add(one);
@@ -34,8 +38,8 @@ public class InstanceService {
         instance.setHostname(hostname);
         instance.setPort(port);
         instance.setUuid(UUID.randomUUID().toString());
-
         instances.add(instance);
+        instanceConnections.put(instance.getUuid(),getRedisConnection(hostname,port));
         return instance;
     }
 
@@ -48,16 +52,28 @@ public class InstanceService {
     }
 
     public Info getInstanceOverview(Instance instance) {
+        RedisConnection connection = instanceConnections.get(instance.getUuid());
+        Properties properties = connection.info();
         Info info = new Info();
-        info.setTotalKeys(136);
-        info.setConnectedClients(49);
-        info.setConnectionsReceived(1567);
-        info.setHitRatio(0.88f);
-        info.setUptime(12.56f);
-        info.setConnectionsRejected(0);
-        info.setTotalMemory(150);
-        info.setVersion("5.0.3");
-        info.setRole("master");
+        info.setTotalKeys(connection.dbSize());
+        info.setConnectedClients(Integer.parseInt(properties.getProperty("connected_clients")));
+        info.setConnectionsReceived(Integer.parseInt(properties.getProperty("total_connections_received")));
+        int hits = Integer.parseInt(properties.getProperty("keyspace_hits"));
+        int misses = Integer.parseInt(properties.getProperty("keyspace_misses"));
+        float hitRatio = (float) hits/(hits+misses);
+        info.setHitRatio(String.format("%.2f",hitRatio));
+        info.setUptime(Float.parseFloat(properties.getProperty("uptime_in_seconds")));
+        info.setConnectionsRejected(Integer.parseInt(properties.getProperty("rejected_connections")));
+        info.setMaxMemory(Long.parseLong(properties.getProperty("maxmemory")));
+        info.setUsedMemory(Long.parseLong(properties.getProperty("used_memory")));
+        info.setVersion(properties.getProperty("redis_version"));
+        info.setRole(properties.getProperty("role"));
         return info;
+    }
+
+    private RedisConnection getRedisConnection(String hostname, int port) {
+        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(hostname, port);
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(config);
+        return jedisConnectionFactory.getConnection();
     }
 }

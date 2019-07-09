@@ -11,6 +11,7 @@
 
     <!--<link rel="stylesheet" href="/css/sticky-footer.css">-->
     <link rel="stylesheet" href="/css/sticky-footer.css">
+    <link rel="stylesheet" href="/css/redis-dash.css">
     <!--<link rel="stylesheet" href="/css/custom-styles.css">-->
 
 
@@ -26,7 +27,7 @@
             </nav>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-3">
         <div class="col-lg-12 ml-4">
             <h5 th:text="${'Name: ' + instance.name}"></h5>
             <p th:text="${'Hostname: ' + instance.hostname + ':' + instance.port}"></p>
@@ -47,51 +48,92 @@
             </nav>-->
             <ul class="nav nav-pills nav-justified">
                 <a class="nav-item btn btn-danger" href="">Overview</a>
+                <a class="nav-item btn" href="#">Data Browser</a>
                 <a class="nav-item btn" href="#">Configuration</a>
                 <a class="nav-item btn" href="#">Clients</a>
             </ul>
         </div>
     </div>
-    <div class="row text-center mt-3" id="overview">
-        <div class="col-lg-3">
-            <h2 th:text="${info.totalKeys}"></h2>
-            <h6>Total Keys</h6>
+    <div class="row text-center" id="overview">
+        <div class="col-lg-3 info">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h2 th:text="${info.totalKeys}"></h2>
+                    <h5 class="card-title">Total Keys</h5>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <h2 th:text="${info.connectedClients}"></h2>
-            <h6>Connected Clients</h6>
+        <div class="col-lg-3 info">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h2 th:text="${info.connectedClients}"></h2>
+                    <h5 class="card-title">Connected Clients</h5>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3 ">
-            <h2 th:text="${info.connectionsReceived}"></h2>
-            <h6>Connections Received</h6>
+        <div class="col-lg-3 info">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h2 th:text="${info.connectionsReceived}"></h2>
+                    <h5 class="card-title">Connections Received</h5>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <h2 th:text="${info.connectionsRejected}"></h2>
-            <h6>Connections Rejected</h6>
+        <div class="col-lg-3 info">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h2 th:text="${info.connectionsRejected}"></h2>
+                    <h5 class="card-title">Connections Rejected</h5>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <h2 th:text="${info.usedMemory}"></h2>
-            <h6>Used Memory</h6>
+        <div class="col-lg-3 info">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h2 th:text="${info.usedMemory}"></h2>
+                    <h5 class="card-title">Used Memory</h5>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <h2 th:text="${info.totalMemory}"></h2>
-            <h6>Total Memory</h6>
+        <div class="col-lg-3 info">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h2 th:text="${info.maxMemory}"></h2>
+                    <h5 class="card-title">Total Memory</h5>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <h2 th:text="${info.hitRatio}"></h2>
-            <h6>Hit Ratio</h6>
+        <div class="col-lg-3 info">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h2 th:text="${info.hitRatio}"></h2>
+                    <h5 class="card-title">Hit Ratio</h5>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <h2 th:text="${info.uptime}"></h2>
-            <h6>Uptime</h6>
+        <div class="col-lg-3 info">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h2 th:text="${info.uptime}"></h2>
+                    <h5 class="card-title">Uptime</h5>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <h2 th:text="${info.role}"></h2>
-            <h6>Role</h6>
+        <div class="col-lg-3 info">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h2 th:text="${info.role}"></h2>
+                    <h5 class="card-title">Role</h5>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <h2 th:text="${info.version}"></h2>
-            <h6>Version</h6>
+        <div class="col-lg-3 info">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h2 th:text="${info.version}"></h2>
+                    <h5 class="card-title">Version</h5>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
