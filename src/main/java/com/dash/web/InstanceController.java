@@ -2,7 +2,6 @@ package com.dash.web;
 
 import com.dash.model.Info;
 import com.dash.model.Instance;
-import com.dash.service.InfoService;
 import com.dash.service.InstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.types.RedisClientInfo;
@@ -16,9 +15,6 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/instances")
 public class InstanceController {
-
-    @Autowired
-    private InfoService infoService;
 
     @Autowired
     private InstanceService instanceService;
