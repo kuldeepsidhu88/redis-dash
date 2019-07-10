@@ -5,6 +5,7 @@ import com.dash.model.Instance;
 import com.dash.service.InfoService;
 import com.dash.service.InstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.types.RedisClientInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,17 @@ public class InstanceController {
             model.addAttribute("info",instanceOverview);
         }
         return "overview.html";
+    }
+
+    @GetMapping("/{uuid}/clients")
+    public String getClients(@PathVariable String uuid, Model model) {
+        Optional<Instance> instance = instanceService.getInstance(uuid);
+        if(instance.isPresent()) {
+            List<RedisClientInfo> clients = instanceService.getClients(instance.get());
+            model.addAttribute("instance",instance.get());
+            model.addAttribute("clients",clients);
+        }
+        return "clients.html";
     }
 
     @PostMapping

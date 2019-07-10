@@ -5,6 +5,7 @@ import com.dash.model.Instance;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.types.RedisClientInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -75,5 +76,10 @@ public class InstanceService {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(hostname, port);
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(config);
         return jedisConnectionFactory.getConnection();
+    }
+
+    public List<RedisClientInfo> getClients(Instance instance) {
+        RedisConnection redisConnection = instanceConnections.get(instance.getUuid());
+        return redisConnection.getClientList();
     }
 }
