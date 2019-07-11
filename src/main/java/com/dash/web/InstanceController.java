@@ -36,6 +36,17 @@ public class InstanceController {
         return "overview.html";
     }
 
+    @GetMapping("/{uuid}/refresh")
+    @ResponseBody
+    public Info refreshInstanceDetails(@PathVariable String uuid) {
+        Optional<Instance> instance = instanceService.getInstance(uuid);
+        if(instance.isPresent()) {
+            Info instanceOverview = instanceService.getInstanceOverview(instance.get());
+            return instanceOverview;
+        }
+        return null;
+    }
+
     @GetMapping("/{uuid}/clients")
     public String getClients(@PathVariable String uuid, Model model) {
         Optional<Instance> instance = instanceService.getInstance(uuid);

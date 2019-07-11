@@ -56,6 +56,7 @@
     </div>
     <hr/>
     <div class="row text-center" id="overview">
+        <input th:value="${instance.uuid}" type="hidden" id="uuid"/>
         <div class="col-lg-3 info">
             <div class="card bg-light">
                 <div class="card-body">
@@ -137,6 +138,20 @@
             </div>
         </div>
     </div>
+    <hr/>
+    <div id="graphs">
+        <div class="row">
+            <div class="col-lg-4">
+                <h5>Total Keys</h5>
+            </div>
+            <div class="col-lg-4">
+                <h5>Connected Clients</h5>
+            </div>
+            <div class="col-lg-4">
+                <h5>Used Memory</h5>
+            </div>
+        </div>
+    </div>
 </main>
 <footer class="footer">
     <div class="container">
@@ -149,7 +164,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/redis-dash.js"></script>
-
+<script>
+    $(document).ready(function(){
+        console.log("ready")
+        //setInterval(refreshInstanceDetails,60000);
+    })
+</script>
 </body>
 
 </html>

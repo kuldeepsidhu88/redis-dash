@@ -35,5 +35,19 @@ function addInstance() {
             alert("Error Occurred. Cannot add instance. Please try again.");
         }
     })
+}
 
+function refreshInstanceDetails() {
+    var uuid = $("#uuid").val();
+    $.ajax({
+        type:"GET",
+        url:"/instances/" + uuid + "/refresh",
+        dataType:"json",
+        success: function (data) {
+            console.log(data)
+        },
+        error:function (error) {
+            console.log("can not refresh details : " + error);
+        }
+    })
 }
