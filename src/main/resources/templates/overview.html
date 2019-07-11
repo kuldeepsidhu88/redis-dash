@@ -91,7 +91,7 @@
         <div class="col-lg-3 info">
             <div class="card bg-light">
                 <div class="card-body">
-                    <h2 th:text="${info.usedMemory}"></h2>
+                    <h2 th:text="${info.usedMemoryHuman}"></h2>
                     <h5 class="card-title">Used Memory</h5>
                 </div>
             </div>
@@ -99,7 +99,7 @@
         <div class="col-lg-3 info">
             <div class="card bg-light">
                 <div class="card-body">
-                    <h2 th:text="${info.maxMemory}"></h2>
+                    <h2 th:text="${info.maxMemoryHuman}"></h2>
                     <h5 class="card-title">Total Memory</h5>
                 </div>
             </div>
@@ -115,7 +115,7 @@
         <div class="col-lg-3 info">
             <div class="card bg-light">
                 <div class="card-body">
-                    <h2 th:text="${info.uptime}"></h2>
+                    <h2 th:text="${info.uptimeDays + ' days'}"></h2>
                     <h5 class="card-title">Uptime</h5>
                 </div>
             </div>

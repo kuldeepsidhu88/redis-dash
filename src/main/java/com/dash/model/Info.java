@@ -5,13 +5,16 @@ public class Info {
     private String version;
     private String role;
     private long maxMemory;
+    private String maxMemoryHuman;
     private long usedMemory;
+    private String usedMemoryHuman;
     private long totalKeys;
     private int connectedClients;
     private int connectionsReceived;
     private int connectionsRejected;
     private String hitRatio;
     private float uptime;
+    private String uptimeDays;
 
     public String getVersion() {
         return version;
@@ -43,6 +46,22 @@ public class Info {
 
     public void setMaxMemory(long maxMemory) {
         this.maxMemory = maxMemory;
+    }
+
+    public String getMaxMemoryHuman() {
+        return maxMemoryHuman;
+    }
+
+    public void setMaxMemoryHuman(String maxMemoryHuman) {
+        this.maxMemoryHuman = maxMemoryHuman;
+    }
+
+    public String getUsedMemoryHuman() {
+        return usedMemoryHuman;
+    }
+
+    public void setUsedMemoryHuman(String usedMemoryHuman) {
+        this.usedMemoryHuman = usedMemoryHuman;
     }
 
     public long getTotalKeys() {
@@ -91,5 +110,13 @@ public class Info {
 
     public void setUptime(float uptime) {
         this.uptime = uptime;
+    }
+
+    public String getUptimeDays() {
+        return uptimeDays;
+    }
+
+    public void setUptimeDays(String uptimeDays) {
+        this.uptimeDays = uptimeDays;
     }
 }

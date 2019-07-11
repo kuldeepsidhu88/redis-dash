@@ -64,9 +64,12 @@ public class InstanceService {
         float hitRatio = (float) hits/(hits+misses);
         info.setHitRatio(String.format("%.2f",hitRatio));
         info.setUptime(Float.parseFloat(properties.getProperty("uptime_in_seconds")));
+        info.setUptimeDays(properties.getProperty("uptime_in_days"));
         info.setConnectionsRejected(Integer.parseInt(properties.getProperty("rejected_connections")));
         info.setMaxMemory(Long.parseLong(properties.getProperty("maxmemory")));
+        info.setMaxMemoryHuman(properties.getProperty("maxmemory_human"));
         info.setUsedMemory(Long.parseLong(properties.getProperty("used_memory")));
+        info.setUsedMemoryHuman(properties.getProperty("used_memory_human"));
         info.setVersion(properties.getProperty("redis_version"));
         info.setRole(properties.getProperty("role"));
         return info;
