@@ -48,7 +48,7 @@
             </nav>-->
             <ul class="nav nav-pills nav-justified">
                 <a class="nav-item btn btn-danger" href="">Overview</a>
-                <a class="nav-item btn" href="#">Data Browser</a>
+                <a class="nav-item btn" th:href="${'/instances/' + instance.uuid + '/browser'}">Data Browser</a>
                 <a class="nav-item btn" href="#">Configuration</a>
                 <a class="nav-item btn" th:href="${'/instances/' + instance.uuid + '/clients'}">Clients</a>
             </ul>

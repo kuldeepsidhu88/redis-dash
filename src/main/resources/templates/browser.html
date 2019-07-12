@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Redis Dash | Clients</title>
+    <title>Redis Dash | Browser</title>
 
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
     <link href="/css/bootstrap.css" rel="stylesheet" />
@@ -48,38 +48,16 @@
             </nav>-->
             <ul class="nav nav-pills nav-justified">
                 <a class="nav-item btn" th:href="${'/instances/' + instance.uuid}">Overview</a>
-                <a class="nav-item btn" th:href="${'/instances/' + instance.uuid + '/browser'}">Data Browser</a>
+                <a class="nav-item btn btn-danger"  href="#">Data Browser</a>
                 <a class="nav-item btn" href="#">Configuration</a>
-                <a class="nav-item btn btn-danger" href="#">Clients</a>
+                <a class="nav-item btn" th:href="${'/instances/' + instance.uuid + '/clients'}">Clients</a>
             </ul>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <hr/>
-            <div class="">
-                <p>Total Clients: <span th:text="${#lists.size(clients)}"></span> </p>
-            </div>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr class="table-info">
-                        <th scope="col">Name</th>
-                        <th scope="col">Client Address</th>
-                        <th scope="col">Last Cmd</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Idle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="client: ${clients}">
-                        <td th:text="${client.name}" />
-                        <td th:text="${client.addressPort}" />
-                        <td th:text="${client.lastCommand}" />
-                        <td th:text="${client.age}/60/60" />
-                        <td th:text="${client.idle}" />
-                    </tr>
-                </tbody>
-            </table>
+            <h5>Top Keys</h5>
         </div>
     </div>
 
