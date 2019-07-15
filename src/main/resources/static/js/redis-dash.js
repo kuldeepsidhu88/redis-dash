@@ -51,3 +51,22 @@ function refreshInstanceDetails() {
         }
     })
 }
+
+function keySearch() {
+    var key = $("#keySearchBox").val();
+    if(key.length >= 3) {
+        console.log(key);
+        $.ajax({
+            type:"GET",
+            url:"search?key="+key,
+            dataType:"json",
+            success: function (data) {
+                console.log(data)
+            },
+            error:function (error) {
+                console.log("can not search : " + error);
+            }
+        })
+    }
+
+}

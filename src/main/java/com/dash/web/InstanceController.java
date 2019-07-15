@@ -10,8 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/instances")
@@ -58,6 +57,16 @@ public class InstanceController {
             model.addAttribute("instance",instance.get());
         }
         return "browser.html";
+    }
+
+    @GetMapping("/{uuid}/search")
+    @ResponseBody
+    public List<String> instanceKeySearch(@PathVariable String uuid,@RequestParam String key) {
+        Optional<Instance> instance = instanceService.getInstance(uuid);
+        if(instance.isPresent()) {
+            browserService.searchKey(instance.get(),key);
+        }
+        return new ArrayList<>();
     }
 
     @GetMapping("/{uuid}/clients")
