@@ -2,6 +2,7 @@ package com.dash.service;
 
 import com.dash.model.Info;
 import com.dash.model.Instance;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -14,6 +15,9 @@ import java.util.*;
 public class InstanceService {
     List<Instance> instances;
     Map<String, RedisConnection> instanceConnections;
+
+    @Autowired
+    private  BrowseService browseService;
 
     public InstanceService() {
         instances = new ArrayList<>();
@@ -84,5 +88,9 @@ public class InstanceService {
     public List<RedisClientInfo> getClients(Instance instance) {
         RedisConnection redisConnection = instanceConnections.get(instance.getUuid());
         return redisConnection.getClientList();
+    }
+
+    public List<String> searchKey(Instance instance, String key) {
+        return browseService.searchKey(instanceConnections.get(instance.getUuid()),key);
     }
 }

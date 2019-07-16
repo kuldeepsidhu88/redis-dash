@@ -2,7 +2,7 @@ package com.dash.web;
 
 import com.dash.model.Info;
 import com.dash.model.Instance;
-import com.dash.service.BrowserService;
+import com.dash.service.BrowseService;
 import com.dash.service.InstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.types.RedisClientInfo;
@@ -18,9 +18,6 @@ public class InstanceController {
 
     @Autowired
     private InstanceService instanceService;
-
-    @Autowired
-    private BrowserService browserService;
 
     @GetMapping
     public List<Instance> getRegisteredInstances() {
@@ -64,7 +61,7 @@ public class InstanceController {
     public List<String> instanceKeySearch(@PathVariable String uuid,@RequestParam String key) {
         Optional<Instance> instance = instanceService.getInstance(uuid);
         if(instance.isPresent()) {
-            browserService.searchKey(instance.get(),key);
+            return instanceService.searchKey(instance.get(),key);
         }
         return new ArrayList<>();
     }
