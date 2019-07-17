@@ -61,7 +61,13 @@ function keySearch() {
             url:"search?key="+key,
             dataType:"json",
             success: function (data) {
-                console.log(data)
+                console.log(data.length);
+                var resultsHtml = '';
+                for (var i = 0; i < data.length; i++) {
+                    resultsHtml += "<p>"+data[i]+"</p><br/>"
+                }
+                console.log(resultsHtml);
+                $("#results").append(resultsHtml);
             },
             error:function (error) {
                 console.log("can not search : " + error);

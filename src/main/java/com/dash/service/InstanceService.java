@@ -23,8 +23,8 @@ public class InstanceService {
         instances = new ArrayList<>();
         instanceConnections = new HashMap<>();
         Instance one = new Instance();
-        one.setHostname("192.168.0.1");
-        one.setName("Sample Instance");
+        one.setName("ubuntu-vm");
+        one.setHostname("192.168.56.101");
         one.setPort(6379);
         one.setUuid(UUID.randomUUID().toString());
 

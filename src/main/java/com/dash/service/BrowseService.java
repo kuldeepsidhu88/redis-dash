@@ -15,7 +15,7 @@ public class BrowseService {
         Set<byte[]> keys = redisConnection.keys(key.getBytes());
         List<String> keyList = new ArrayList<>();
         for (byte[] arr:keys) {
-            keyList.add(arr.toString());
+            keyList.add(new String(arr));
         }
         return keyList;
     }
