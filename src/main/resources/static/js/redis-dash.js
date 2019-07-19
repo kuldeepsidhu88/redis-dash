@@ -3,12 +3,33 @@ function addInstance() {
     var hostname = $("#hostname").val();
     var port = $("#port").val();
 
+    $("#errors").empty();
+
+    var errors = [];
+    if(name == '') {
+        errors.push("Name should not be empty")
+    }
+    if(hostname == '') {
+        errors.push("Hostname should not be empty")
+    }
+    if(port == '') {
+        errors.push("Port should not be empty")
+    }
+
+    if(errors.length != 0) {
+        var errorHtml = "";
+        for(var error in errors) {
+            errorHtml+="<li>" + errors[error] + "</li>";
+        }
+        $("#errors").append(errorHtml);
+        $("#errors").show();
+        return;
+    }
+
     var data = {}
     data['name']= name;
     data['hostname']=hostname;
     data['port']=port;
-
-    // TODO: Add validation on fields
 
     $.ajax({
         type:"POST",
