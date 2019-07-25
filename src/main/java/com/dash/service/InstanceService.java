@@ -17,7 +17,7 @@ public class InstanceService {
     Map<String, RedisConnection> instanceConnections;
 
     @Autowired
-    private  BrowseService browseService;
+    private BrowseService browseService;
 
     public InstanceService() {
         instances = new ArrayList<>();
@@ -39,8 +39,7 @@ public class InstanceService {
         instance.setPort(port);
         instance.setUuid(UUID.randomUUID().toString());
         instances.add(instance);
-        // TODO : get redis connection with password
-        instanceConnections.put(instance.getUuid(),getRedisConnection(hostname,port));
+        instanceConnections.put(instance.getUuid(), getRedisConnection(hostname, port, password));
         return instance;
     }
 
@@ -61,8 +60,8 @@ public class InstanceService {
         info.setConnectionsReceived(Integer.parseInt(properties.getProperty("total_connections_received")));
         int hits = Integer.parseInt(properties.getProperty("keyspace_hits"));
         int misses = Integer.parseInt(properties.getProperty("keyspace_misses"));
-        float hitRatio = (float) hits/(hits+misses);
-        info.setHitRatio(String.format("%.2f",hitRatio));
+        float hitRatio = (float) hits / (hits + misses);
+        info.setHitRatio(String.format("%.2f", hitRatio));
         info.setUptime(Float.parseFloat(properties.getProperty("uptime_in_seconds")));
         info.setUptimeDays(properties.getProperty("uptime_in_days"));
         info.setConnectionsRejected(Integer.parseInt(properties.getProperty("rejected_connections")));
@@ -75,8 +74,11 @@ public class InstanceService {
         return info;
     }
 
-    private RedisConnection getRedisConnection(String hostname, int port) {
+    private RedisConnection getRedisConnection(String hostname, int port, String password) {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(hostname, port);
+        if (null != password && !password.isEmpty()) {
+            config.setPassword(password);
+        }
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(config);
         return jedisConnectionFactory.getConnection();
     }
@@ -87,6 +89,6 @@ public class InstanceService {
     }
 
     public List<String> searchKey(Instance instance, String key) {
-        return browseService.searchKey(instanceConnections.get(instance.getUuid()),key);
+        return browseService.searchKey(instanceConnections.get(instance.getUuid()), key);
     }
 }
