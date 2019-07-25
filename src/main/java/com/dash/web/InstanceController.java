@@ -80,7 +80,7 @@ public class InstanceController {
     @PostMapping
     @ResponseBody
     public Instance registerInstance(@RequestBody Instance instance) {
-        return instanceService.registerInstance(instance.getName(), instance.getHostname(), instance.getPort());
+        return instanceService.registerInstance(instance.getName(), instance.getHostname(), instance.getPort(),instance.getPassword());
     }
 
     @DeleteMapping("/{uuid}")

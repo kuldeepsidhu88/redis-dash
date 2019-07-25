@@ -5,6 +5,7 @@ public class Instance {
     private String hostname;
     private int port;
     private String uuid;
+    private String password;
 
     public String getName() {
         return name;
@@ -36,5 +37,13 @@ public class Instance {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

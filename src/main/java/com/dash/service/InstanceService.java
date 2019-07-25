@@ -29,21 +29,17 @@ public class InstanceService {
         one.setUuid(UUID.randomUUID().toString());
 
         instances.add(one);
-        instanceConnections.put(one.getUuid(),getRedisConnection(one.getHostname(),one.getPort()));
-        /*instances.add(one);
-        instances.add(one);
-        instances.add(one);
-        instances.add(one);
-        instances.add(one);*/
+        //instanceConnections.put(one.getUuid(),getRedisConnection(one.getHostname(),one.getPort()));
     }
 
-    public Instance registerInstance(String name, String hostname, int port) {
+    public Instance registerInstance(String name, String hostname, int port, String password) {
         Instance instance = new Instance();
         instance.setName(name);
         instance.setHostname(hostname);
         instance.setPort(port);
         instance.setUuid(UUID.randomUUID().toString());
         instances.add(instance);
+        // TODO : get redis connection with password
         instanceConnections.put(instance.getUuid(),getRedisConnection(hostname,port));
         return instance;
     }

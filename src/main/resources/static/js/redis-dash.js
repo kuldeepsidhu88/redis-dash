@@ -2,6 +2,7 @@ function addInstance() {
     var name = $("#name").val();
     var hostname = $("#hostname").val();
     var port = $("#port").val();
+    var password = $("#password").val();
 
     $("#errors").empty();
 
@@ -27,9 +28,10 @@ function addInstance() {
     }
 
     var data = {}
-    data['name']= name;
-    data['hostname']=hostname;
-    data['port']=port;
+    data['name'] = name;
+    data['hostname'] = hostname;
+    data['port'] = port;
+    data['password'] = password;
 
     $.ajax({
         type:"POST",
